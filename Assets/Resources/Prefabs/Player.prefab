@@ -2505,10 +2505,13 @@ MonoBehaviour:
   animationObj: {fileID: 1713552006068388405}
   cameraCont: {fileID: 2829572146306107288, guid: 88dce9bae87d28a4983e6b79b89362bb, type: 3}
   gravity: -9.81
+  gameoverImg: {fileID: 0}
   currentMapName: 
   currentScene: 
   playerDamage: 0
   isDie: 0
+  sceneChangeVec: {x: 0, y: 0, z: 0}
+  mainFeidPos: {x: 0, y: 0, z: 0}
 --- !u!95 &7687095329547735814
 Animator:
   serializedVersion: 4

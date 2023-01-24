@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject animationObj;
     [SerializeField] private CameraController cameraCont;
     [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private GameObject gameoverImg;
 
     private CharacterController charCont;
     private Animator anim;
@@ -17,17 +18,21 @@ public class Player : MonoBehaviour
     private float moveSpeed = 8f;
     private float jumpPower = 3f;
     private bool interationDown;
+    private bool IsPause;
 
     public string currentMapName; // portal 스크립트에 있는 mapNmae 변수의 값을 저장
     public string currentScene;
     public float playerDamage;
     public bool isDie = false;
+    
 
     public Vector3 sceneChangeVec;
 
     public Vector3 mainFeidPos;
     private void Start()
     {
+        IsPause = false;
+
         Cursor.lockState = CursorLockMode.Locked;
         charCont = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
@@ -155,11 +160,9 @@ public class Player : MonoBehaviour
     /// </summary>
     public void PlayerDIe()
     {
-        if (GameManager.Instance.statusMgr.currentHp <= 0)
-        {
-            isDie = true;
-            Animation("onDie");
-        }
+        isDie = true;
+        Animation("onDie");
+        gameoverImg.SetActive(true);
     }
     #endregion
 

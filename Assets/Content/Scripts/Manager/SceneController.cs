@@ -39,7 +39,6 @@ public class SceneController : MonoBehaviour
     {
         StartCoroutine(SceneChange("Dungeon2"));
     }
-
     IEnumerator SceneChange(string sceneName)
     {
         yield return new WaitForSeconds(0.5f);

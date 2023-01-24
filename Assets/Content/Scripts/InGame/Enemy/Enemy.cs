@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
     private Player player;
     public Animator anim;
     public Rigidbody rigid;
-    public bool isAttack;
+    public bool isAttack = false;
     private bool dead;
     public bool isDamage;
     private float attackDistance = 0.5f; // 공격 사거리
@@ -75,7 +75,10 @@ public class Enemy : MonoBehaviour
                 nextAttackTime = Time.time + attackTime;
             }
         }
-        Targeting();
+        if (player.isDie == false)
+        {
+            Targeting();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -115,9 +118,9 @@ public class Enemy : MonoBehaviour
             RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, targetRadius,  // 레이로 쏴서 Player Layer 찍힌 타겟이면 앞 방향으로 따라가기. 
                 transform.forward, targetRange, LayerMask.GetMask("Player"));
 
-            if (rayHits.Length > 0 && !isAttack)
+            //if (rayHits.Length > 0 && !isAttack)
+            if(rayHits.Length > 0 && player.isDie == false)
             {
-                StopCoroutine(Attack());
                 StartCoroutine(Attack());
             }
         }
@@ -133,9 +136,12 @@ public class Enemy : MonoBehaviour
             GameManager.Instance.statusMgr.GSHP(-5);
             if (GameManager.Instance.statusMgr.currentHp <= 0)
             {
-                isAttack = false;
-                StopCoroutine(Attack());
                 player.PlayerDIe();
+                if (player.isDie == true)
+                {
+                    isAttack = false;
+                    StopCoroutine(Attack());
+                }
             }
         }
     }
@@ -143,7 +149,6 @@ public class Enemy : MonoBehaviour
     {
         currentState = State.Chasing;
         isAttack = true;
-        //isDamage = true;
         if(enemyType != Type.Slime)
         {
             Animation("onAttack");
@@ -153,7 +158,6 @@ public class Enemy : MonoBehaviour
         {
             case Type.Jelly: // 일반 몬스터 A타입
                 yield return new WaitForSeconds(0.2f);
-                transform.LookAt(player.transform.position);
                 area.enabled = true;  // AttackCollision 활성화
 
                 yield return new WaitForSeconds(1f);
@@ -186,7 +190,6 @@ public class Enemy : MonoBehaviour
         }
         currentState = State.Idle;
         isAttack = false;
-        //isDamage = false;
     }
     IEnumerator UpdatePath()
     {
