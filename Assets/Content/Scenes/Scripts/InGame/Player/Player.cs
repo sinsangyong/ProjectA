@@ -162,7 +162,7 @@ public class Player : MonoBehaviour
     {
         isDie = true;
         Animation("onDie");
-        gameoverImg.SetActive(true);
+        Death.Instance.HandleDeath();
     }
     #endregion
 
