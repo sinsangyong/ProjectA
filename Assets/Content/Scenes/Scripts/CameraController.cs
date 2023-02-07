@@ -13,8 +13,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float xSpeed = 400;
     [SerializeField] private float ySpeed = 250;
 
-    private float yMin = 5;
-    private float yMax = 80;
+    private float xMin = 5;
+    private float xMax = 80;
     private float x, y;
     private float distance;
 
@@ -36,14 +36,14 @@ public class CameraController : MonoBehaviour
             return;
         }
 
-        x += Input.GetAxis("Mouse X") * xSpeed * Time.deltaTime;
-        y -= Input.GetAxis("Mouse Y") * ySpeed * Time.deltaTime;
+        x += Input.GetAxis("Mouse X") * xSpeed * Time.deltaTime; // x축 회전시 y값 변화
+        y -= Input.GetAxis("Mouse Y") * ySpeed * Time.deltaTime; // y축 회전시 x값 변화
 
-        y = ClampAngle(y, yMin, yMax);
+        y = ClampAngle(y, xMin, xMax); // 최솟값 최댓값 지정
 
         transform.rotation = Quaternion.Euler(y, x, 0);
         distance -= Input.GetAxis("Mouse ScrollWheel") * wheel * Time.deltaTime;
-        distance = Mathf.Clamp(distance, minDis, maxDis);
+        distance = Mathf.Clamp(distance, minDis, maxDis); // 최소 최대값 지정해줘서 범위 이외의 값 넘지 못하게 함
     }
 
     private void LateUpdate()
