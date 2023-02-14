@@ -7,8 +7,8 @@ public class ChangeScene : MonoBehaviour
 {
     public void ReStart()
     {
-        StartCoroutine(SceneChange("InGame"));
         Time.timeScale = 1;
+        StartCoroutine(SceneChange("InGame"));
     }
 
     public void Quit()

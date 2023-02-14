@@ -22,7 +22,6 @@ public class OpenDoor : MonoBehaviour
         {
             Debug.Log("´ê¾Ò´Ù");
             openDoor.SetActive(true);
-            //GameObject.Find("BlueDragon").GetComponent<Dragon>().Wait();
             GameObject.Find("BlueDragon").GetComponent<Dragon>().BossAni();
             Destroy(gameObject);
         }
