@@ -7,7 +7,6 @@ public class Dragon : MonoBehaviour
 {
     public enum Animation
     {
-        //Idle01,
         Idle02,
         Sleep,
         Walk,
@@ -16,11 +15,7 @@ public class Dragon : MonoBehaviour
         ClawAttack,
         FlameAttack,
         Scream,
-        //Fly,
-        //FlyFlameAttack,
-        //Fly_Down,
         
-        //Hit,
         
         Die
     }
@@ -126,9 +121,6 @@ public class Dragon : MonoBehaviour
                     GameManager.Instance.statusMgr.GSHP(-20);
                     Debug.Log("½Ø°Ô ±ú¹°·È´Ù.");
                     break;
-                /*case Animation.FlameAttack:
-                    StartCoroutine(FlameAttack());
-                    break;*/
             }
         }
         Wait();
@@ -205,16 +197,6 @@ public class Dragon : MonoBehaviour
         transform.LookAt(player.transform);
 
     }
-
-    //IEnumerator FlameAttack()
-    //{
-    //    nextATKDelayTime = 8f;
-    //    actionType = ActionType.Attack;
-    //    SetAnimation((int)Animation.FlameAttack);
-
-    //    yield return new WaitForSeconds(1.5f);
-    //    Instantiate(fire.gameObject, fireParent);
-    //}
 
     public void Damage(int damage)
     {
